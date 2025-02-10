@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 
+import static java.lang.Float.parseFloat;
+
 public class LoanPane extends GridPane {
     private TextField monthlyPayment;
     private TextField totalPayment;
@@ -45,10 +47,10 @@ public class LoanPane extends GridPane {
         monthlyPayment.setOnAction(this::processReturn);
 
         totalPayment = new TextField();
-        monthlyPayment.setFont(font);
-        monthlyPayment.setPrefWidth(200);
-        monthlyPayment.setAlignment(Pos.CENTER);
-        monthlyPayment.setOnAction(this::processReturn);
+        totalPayment.setFont(font);
+        totalPayment.setPrefWidth(200);
+        totalPayment.setAlignment(Pos.CENTER);
+        totalPayment.setOnAction(this::processReturn);
 
         annualInterestRate = new TextField();
         annualInterestRate.setFont(font);
@@ -86,10 +88,28 @@ public class LoanPane extends GridPane {
     }
     public void processReturn(ActionEvent event)
     {
-        int fahrenheitTemp = Integer.parseInt(annualInterestRate.getText());
-        int celsiusTemp = (fahrenheitTemp - 32) * 5 / 9;
+        double intRate = Double.parseDouble(annualInterestRate.getText());
+        int years = Integer.parseInt(annualInterestRate.getText());
+        double amountBorrowed = Double.parseDouble(annualInterestRate.getText());
+
+        double monthlyPaymentFinal =
+        double totalPaymentFinal = (intRate - 32) * 5 / 9;
+
         monthlyPayment.setText(celsiusTemp + "");
+
+        numYears.setText(celsiusTemp + "");
+
     }
+    public double monthlyPaymentCalculation(double interestRate, int years, double amountBorrowed){
+
+
+    }
+
+    public double totalPaymentCalculation(double interestRate, int years, double amountBorrowed){
+
+
+    }
+
 }
 
 
