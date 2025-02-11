@@ -86,27 +86,32 @@ public class LoanPane extends GridPane {
         add(outputLabel2, 0, 4);
         add(totalPayment, 1, 4);
     }
+
     public void processReturn(ActionEvent event)
     {
         double intRate = Double.parseDouble(annualInterestRate.getText());
         int years = Integer.parseInt(annualInterestRate.getText());
         double amountBorrowed = Double.parseDouble(annualInterestRate.getText());
 
-        double monthlyPaymentFinal =
-        double totalPaymentFinal = (intRate - 32) * 5 / 9;
+        double monthlyPaymentFinal = monthlyPaymentCalculation(intRate, years, amountBorrowed);
+        double totalPaymentFinal = totalPaymentCalculation(intRate, years, amountBorrowed);
 
-        monthlyPayment.setText(celsiusTemp + "");
-
-        numYears.setText(celsiusTemp + "");
+        monthlyPayment.setText(monthlyPaymentFinal + "");
+        totalPayment.setText(totalPaymentFinal + "");
 
     }
-    public double monthlyPaymentCalculation(double interestRate, int years, double amountBorrowed){
 
+    public double monthlyPaymentCalculation(double interestRate, int years, double amountBorrowed){
+        double payment = 0;
+
+
+
+        return payment;
 
     }
 
     public double totalPaymentCalculation(double interestRate, int years, double amountBorrowed){
-
+        return 0;
 
     }
 
