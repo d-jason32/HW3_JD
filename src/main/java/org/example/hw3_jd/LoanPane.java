@@ -3,6 +3,7 @@ package org.example.hw3_jd;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -20,9 +21,13 @@ public class LoanPane extends GridPane {
     public LoanPane() {
         Font font = new Font(18);
 
+        Button push = new Button("Calculate");
+        push.setOnAction(this::processReturn);
+        GridPane.setHalignment(push, HPos.RIGHT);
+
         Label inputLabel = new Label("Annual Interest Rate:");
         inputLabel.setFont(font);
-        GridPane.setHalignment(inputLabel, HPos.RIGHT);
+        GridPane.setHalignment(inputLabel, HPos.LEFT);
 
         Label inputLabel2 = new Label("Number of Years:");
         inputLabel2.setFont(font);
@@ -43,32 +48,27 @@ public class LoanPane extends GridPane {
         monthlyPayment = new TextField();
         monthlyPayment.setFont(font);
         monthlyPayment.setPrefWidth(200);
-        monthlyPayment.setAlignment(Pos.CENTER);
-        monthlyPayment.setOnAction(this::processReturn);
+        monthlyPayment.setAlignment(Pos.CENTER_RIGHT);
 
         totalPayment = new TextField();
         totalPayment.setFont(font);
         totalPayment.setPrefWidth(200);
-        totalPayment.setAlignment(Pos.CENTER);
-        totalPayment.setOnAction(this::processReturn);
+        totalPayment.setAlignment(Pos.CENTER_RIGHT);
 
         annualInterestRate = new TextField();
         annualInterestRate.setFont(font);
         annualInterestRate.setPrefWidth(200);
-        annualInterestRate.setAlignment(Pos.CENTER);
-        annualInterestRate.setOnAction(this::processReturn);
+        annualInterestRate.setAlignment(Pos.CENTER_RIGHT);
 
         numYears = new TextField();
         numYears.setFont(font);
         numYears.setPrefWidth(200);
-        numYears.setAlignment(Pos.CENTER);
-        numYears.setOnAction(this::processReturn);
+        numYears.setAlignment(Pos.CENTER_RIGHT);
 
         loanAmount = new TextField();
         loanAmount.setFont(font);
         loanAmount.setPrefWidth(200);
-        loanAmount.setAlignment(Pos.CENTER);
-        loanAmount.setOnAction(this::processReturn);
+        loanAmount.setAlignment(Pos.CENTER_RIGHT);
 
         setAlignment(Pos.CENTER);
         setHgap(20);
@@ -85,6 +85,8 @@ public class LoanPane extends GridPane {
         add(monthlyPayment, 1, 3);
         add(outputLabel2, 0, 4);
         add(totalPayment, 1, 4);
+        add(push, 1, 5);
+
     }
 
     public void processReturn(ActionEvent event)
@@ -96,8 +98,11 @@ public class LoanPane extends GridPane {
         double monthlyPaymentFinal = monthlyPaymentCalculation(intRate, years, amountBorrowed);
         double totalPaymentFinal = totalPaymentCalculation(intRate, years, amountBorrowed);
 
-        monthlyPayment.setText("$" + monthlyPaymentFinal + "");
-        totalPayment.setText("$" + totalPaymentFinal + "");
+        String payment = String.format( "%.2f", monthlyPaymentFinal);
+        String entirePayment = String.format( "%.2f", totalPaymentFinal);
+
+        monthlyPayment.setText("$" + payment);
+        totalPayment.setText("$" + entirePayment);
 
     }
 
@@ -106,7 +111,6 @@ public class LoanPane extends GridPane {
         double P = amountBorrowed;
         double n = years * 12;
 
-
         return (P * r * Math.pow((1 + r), n)) / ((Math.pow((1 + r), n)) - 1 );
 
     }
@@ -114,8 +118,6 @@ public class LoanPane extends GridPane {
     public double totalPaymentCalculation(double interestRate, int years, double amountBorrowed){
 
         double totalPayment = years * 12 * monthlyPaymentCalculation(interestRate, years, amountBorrowed);
-
-
 
         return totalPayment;
 
